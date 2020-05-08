@@ -1,7 +1,34 @@
 {
   "name": "mssql-models",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "areologist",
-  "license": "MIT"
+  "author": {
+    "name": "areologist",
+    "email": "sobriendev@gmail.com",
+    "url": "https://github.com/areologist"
+  },
+  "license": "MIT",
+  "bin": {
+    "modelgen": "./cli.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "keywords": [
+    "cli",
+    "mssql",
+    "orm",
+    "models"
+  ],
+  "scripts": {
+    "build": "rm -rf ./dist && tsc --project tsconfig.json",
+    "haimodelgen": "ts-node-script ./src/index.ts"
+  },
+  "dependencies": {
+    "commander": "^5.1.0",
+    "lodash": "^4.17.15",
+    "mssql": "^6.2.0"
+  },
+  "devDependencies": {
+    "tape": "^5.0.0"
+  }
 }
