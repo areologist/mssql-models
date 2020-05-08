@@ -1,0 +1,7 @@
+{
+  "name": "mssql-models",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "areologist",
+  "license": "MIT"
+}
