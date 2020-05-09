@@ -1,0 +1,15 @@
+import { <%= table.sqlTypes.join(', ') %> } from 'mssql';
+
+import EntityBase from './EntityBase';
+
+export interface <%= table.name %> {
+<%= columns.map(c => `  ${c.name}${c.nullable ? '?' : ''}: ${c.jsType};`).join('\n') %>
+}
+
+export default class <%= table.name %>Entity extends EntityBase<<%= table.name %>> {
+  constructor() {
+    super('<%= table.name %>', {
+<%= columns.map(c => `      ${c.name}: ${c.paramType}`).join(',\n') %>
+    }, [<%= columns.filter(c => c.primaryKey).map(c => `'${c.name}'`).join(', ') %>]);
+  }
+}

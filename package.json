@@ -19,13 +19,10 @@
     "orm",
     "models"
   ],
-  "scripts": {
-    "build": "rm -rf ./dist && tsc --project tsconfig.json",
-    "haimodelgen": "ts-node-script ./src/index.ts"
-  },
   "dependencies": {
-    "commander": "^5.1.0",
+    "chalk": "^4.0.0",
     "lodash": "^4.17.15",
+    "meow": "^7.0.0",
     "mssql": "^6.2.0"
   },
   "devDependencies": {

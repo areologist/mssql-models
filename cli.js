@@ -1,14 +1,58 @@
 #!/usr/bin/env node
-const { program } = require('commander');
 
-program
-  .option('-d, --debug', 'output extra debugging')
-  .option('-s, --small', 'small pizza size')
-  .option('-p, --pizza-type <type>', 'flavour of pizza');
+const meow = require('meow');
 
-program.parse(process.argv);
+const helpString = `
+	Usage
+	  $ modelgen <flags>
 
-if (program.debug) console.log(program.opts());
-console.log('pizza details:');
-if (program.small) console.log('- small pizza size');
-if (program.pizzaType) console.log(`- ${program.pizzaType}`);
+	Options
+    --server, -s      The sql server name
+    --database, -d    The sql server database name
+    --user, -u        The sql server user id
+    --password, -p    The sql server password
+    --output, -o      Output directory for generated models
+    --template, -t    Path to custom template for model output
+
+	Examples
+	  $ modelgen -s localhost -d MySqlDb -u sa -p meowmeow
+`;
+
+const flags = {
+  server: {
+    type: 'string',
+    alias: 's',
+    isRequired: () => true
+  },
+  database: {
+    type: 'string',
+    alias: 'd',
+    isRequired: () => true
+  },
+  user: {
+    type: 'string',
+    alias: 'u',
+    isRequired: () => true
+  },
+  password: {
+    type: 'string',
+    alias: 'p',
+    isRequired: () => true
+  },
+  output: {
+    type: 'string',
+    alias: 'o'
+  },
+  template: {
+    type: 'string',
+    alias: 't'
+  },
+};
+
+const cli = meow(helpString, { flags });
+
+const main = require('./lib/main');
+
+(async () => {
+  await main(cli.input[0], cli.flags);
+})();
